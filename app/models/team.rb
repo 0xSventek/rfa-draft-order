@@ -4,7 +4,7 @@ class Team < ActiveRecord::Base
   
   def logo_src
     src = self.first_name.downcase + " " + self.last_name.downcase
-    src = "/logos/" + src.gsub(".","").gsub(" ","_") + ".png"
+    src = src.gsub(".","").gsub(" ","_") + ".png"
     src
   end
   
