@@ -1,0 +1,96 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+/* font-family: 'Russo One', sans-serif; */
+.home_body .navbar-brand{font-family: 'Russo One', sans-serif; color:#fff;}
+body{padding-top:72px;}
+
+html body{background:#000 url(image-path('stadium-background.png?2')) no-repeat center top fixed;}
+#main_container{position:relative;}
+
+.collapse.navbar-collapse{
+  li a{
+    
+  }
+}
+
+.list-group{
+  -webkit-box-shadow: 0 2px 16px 8px rgba(0,0,0,0.5);
+box-shadow: 0 2px 16px 8px rgba(0,0,0,0.5);
+border:0;
+}
+
+.list-group-item.inactive{
+  opacity:0.25;
+  .team{
+    .team-name{
+      .firstname{color:#fff;}
+    }
+  }
+}
+
+.list-group-item{
+  color:#fff;
+  background-position: -30px -20px;
+  background-repeat: no-repeat;
+  background-size: 100px 100px;
+  padding:0px;
+  border:0;
+  position:relative;
+  .team{
+    background-image:url(/assets/team-gradient.png?9);
+    padding: 10px 0px 10px 72px;
+    .team-name{
+      .firstname{text-transform:uppercase; color:rgba(255,255,255,0.5); font-size:10px; font-family: 'Aldrich', sans-serif;}
+      .lastname{text-transform:uppercase; text-shadow:rgba(0,0,0,0.75) 0 2px; font-family: 'Russo One', sans-serif; font-size:24px; line-height:0.75em; letter-spacing:1px;}
+    }
+    .owner-name{
+      font-size: 24px;
+      position:absolute;
+      color:rgba(255,255,255,0.5);
+      top: 15px;
+      letter-spacing:-1px;
+      right:15px;
+      font-family: 'Aldrich', sans-serif;
+    }
+    .rank{
+      position:absolute;
+      font-weight:bold;
+      color:#ccc;
+      top: 4px;
+      left: -48px;
+      font-family: 'Russo One', sans-serif;
+      letter-spacing:-3px;
+      font-size:36px;
+      text-shadow:rgba(0,0,0,0.95) 0 2px 4px;
+      width:35px;
+      text-align:center;
+    }
+  }
+}
+
+#scores_modal {
+  .modal-body{
+
+  }
+  .table{
+    td,th{
+      border-top:0;
+      border-bottom:1px solid #ddd;
+    }
+  }
+}
+
+
+#score_alert{
+  z-index:9999;
+  position:absolute;
+  width:600px;
+  bottom:-67px;
+  left:285px;
+  -webkit-box-shadow: 0 2px 16px 8px rgba(0,0,0,0.5);
+  box-shadow: 0 2px 16px 8px rgba(0,0,0,0.5);
+  p{margin-bottom:0;}
+}

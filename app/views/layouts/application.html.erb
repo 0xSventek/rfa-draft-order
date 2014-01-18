@@ -1,14 +1,92 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>DraftOrder</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <title>RFA Draft Order</title>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Russo+One' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body id="<%= params[:controller] %>_<%= params[:action] %>" class="<%= params[:controller] %>_body">
+  
+  <div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <span class="navbar-brand"><i class="fa fa-trophy"></i> RFA Draft Order on <%= @date.strftime("%b %e") %></span>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/standings/<%= @date.yesterday.year %>/<%= @date.yesterday.month %>/<%= @date.yesterday.day %>"><i class="fa fa-arrow-circle-o-left"></i> <%= @date.yesterday.strftime("%b %e") %></a></li>
+          
+          <% if @date != Date.today %>
+            <li><a href="/"><i class="fa fa-calendar-o"></i> Today</a></li>
+          <% end %>
+          
+          <% unless @date == Date.today%>
+            <li><a href="/standings/<%= @date.tomorrow.year %>/<%= @date.tomorrow.month %>/<%= @date.tomorrow.day %>"><%= @date.tomorrow.strftime("%b %e") %> <i class="fa fa-arrow-circle-o-right"></i></a></li>
+          <% end %>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" id="help" data-toggle="modal" data-target="#help_modal"><i class="fa fa-question-circle"></i> Explanation</a></li>
+          <li><a href="#" id="scores" data-toggle="modal" data-target="#scores_modal"><i class="fa fa-clock-o"></i> Scores</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
 
-<%= yield %>
-
+  <div id="main_container" class="container"> 
+    <%= yield %>
+  </div>
 </body>
 </html>
+
+<div class="modal fade" id="help_modal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">How does this work?</h4>
+      </div>
+      <div class="modal-body">
+        <p>Each owner will be randomly assigned a MLB team. When your team scores exactly 10 runs in a game (win or loss), you will claim first choice of your preferred draft slot. All other draft-slot-preferences occupied will be bumped down one position (e.g #1 becomes #2, #2 becomes #3, and so on). You can claim the #1 draft-slot-preference any number of times during the season. The game will begin on MLB Opening Day 2014 and will end no later than 2 weeks before the 2014 RFA Draft (date, TBD). When the game ends, I will send out an email to each person to select their preferred draft slot in the order that the outcome of the game has determined. </p>
+        <p>This sounds more complicated than actually it is. I built this so we can keep track of the draft order as it currently stands. I think this is going to be a fun extension of our fantasy football season, so I hope everyone gets into it. If there are any questions, please post them <%= link_to "in the Facebook Group", "https://www.facebook.com/groups/575794272472011/" %>, or ask either Zach or me. </p>
+      </div>
+      <div class="modal-footer">
+        <p>-The Commish</p>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="scores_modal" tabindex="-1" role="dialog" aria-labelledby="scoresModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">
+          Winning Scores 
+          <% unless @date == Date.today %>
+          through <%= @date.strftime("%b %e") %>
+          <% end %>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <% @recent_winners.each do |winner| %>
+            <tr>
+              <td class="winner_logo"><img src="<%= winner.team.logo_src %>" width="24"></td>
+              <td class="geam_details"><%= winner_text(winner) %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

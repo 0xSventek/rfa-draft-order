@@ -1,0 +1,69 @@
+<div class="col-md-6 col-md-offset-3">
+  <ul class="list-group">
+    <% rank = 1 %>
+    <% @results.each do |result| %>
+      <% unless result.team.owner.blank? %>
+        <li class="list-group-item" style="background-image: url('<%= result.team.logo_src %>'); background-color:<%= result.team.color_1 %>;">
+          <div class="team" style="">
+            <span class="rank">
+              <%= rank %>
+            </span>
+            <span class="team-name">
+              <span class="firstname"><%= result.team.first_name %></span><br />
+              <span class="lastname"><%= result.team.last_name %></span>
+            </span>
+            <span class="owner-name">
+              <%= result.team.owner.name %>
+            </span>
+          </div>  
+        </li>
+        <% rank += 1 %>
+      <% end %>
+    <% end %>
+    
+    <% @non_winners.each do |owner| %>
+      <li class="inactive list-group-item" style="background-image: url('<%= owner.team.logo_src %>'); background-color:#ddd;">
+        <div class="team" style="">
+          <span class="rank">
+            <%= rank %>
+          </span>
+          <span class="team-name">
+            <span class="firstname"><%= owner.team.first_name %></span><br />
+            <span class="lastname"><%= owner.team.last_name %></span>
+          </span>
+          <span class="owner-name">
+            <%= owner.name %>
+          </span>
+        </div>  
+      </li>
+      <% rank += 1 %>
+    <% end %>
+  </ul>
+</div>
+
+<% unless @todays_winner.blank? %>
+  <div class="panel panel-default" id="score_alert">
+    <div class="panel-body">
+      <% @todays_winner.each do |w| %>
+        <p class="lead"><img src="<%= w.team.logo_src %>" width="32"> The <%= w.team.last_name %> scored 10 runs <%= @date == Date.today ? "today" : "on this day for" %> <b><%= w.team.owner.name %>.</b></p>
+      <% end %>
+    </div>
+  </div>
+
+  <script type="text/javascript" charset="utf-8">
+    $('#score_alert').delay(300).animate({bottom: '72px'}, 100).delay(3500).fadeOut('fast');
+  </script>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+  elms = $('.list-group-item');
+  // $('.list-group-item').each(function (i,e) {
+  //   setTimeout (function () { $(e).addClass('animated flipInX'); }, 500);
+  //   // $(this).delay(500).addClass('animated flipInX');
+  // });
+  
+  // while (elms.length > 0) {
+//     setTimeout (function () { $(elms.pop()).addClass('animated flipInX'); }, 500);
+//   }
+//   
+</script>

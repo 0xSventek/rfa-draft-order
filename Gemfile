@@ -17,7 +17,9 @@ gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+gem "twitter", "~> 5.5.1"
 
+gem 'seed_dump'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
@@ -40,3 +42,8 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem "jquery-rails"
+
+gem 'rails_12factor', group: :production
+gem 'pg'
+
+ruby "2.0.0"
