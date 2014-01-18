@@ -47,5 +47,5 @@ Team.create!([
 ])
 
 Team.all.each do |t|
-  Results.create!(team_id: t.id, position: nil)
+  Result.create!(team_id: t.id, position: nil)
 end
