@@ -81,7 +81,7 @@
         <table class="table">
           <% @recent_winners.each do |winner| %>
             <tr>
-              <td class="winner_logo"><img src="<%= winner.team.logo_src %>" width="24"></td>
+              <td class="winner_logo"><img src="<%= asset_path winner.team.logo_src %>" width="24"></td>
               <td class="geam_details"><%= winner_text(winner) %></td>
             </tr>
           <% end %>

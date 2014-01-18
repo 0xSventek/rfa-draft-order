@@ -3,7 +3,7 @@
     <% rank = 1 %>
     <% @results.each do |result| %>
       <% unless result.team.owner.blank? %>
-        <li class="list-group-item" style="background-image: url('<%= result.team.logo_src %>'); background-color:<%= result.team.color_1 %>;">
+        <li class="list-group-item" style="background-image: url('<%= asset_path result.team.logo_src %>'); background-color:<%= result.team.color_1 %>;">
           <div class="team" style="">
             <span class="rank">
               <%= rank %>
@@ -22,7 +22,7 @@
     <% end %>
     
     <% @non_winners.each do |owner| %>
-      <li class="inactive list-group-item" style="background-image: url('<%= owner.team.logo_src %>'); background-color:#ddd;">
+      <li class="inactive list-group-item" style="background-image: url('<%= asset_path owner.team.logo_src %>'); background-color:#ddd;">
         <div class="team" style="">
           <span class="rank">
             <%= rank %>
@@ -45,7 +45,7 @@
   <div class="panel panel-default" id="score_alert">
     <div class="panel-body">
       <% @todays_winner.each do |w| %>
-        <p class="lead"><img src="<%= w.team.logo_src %>" width="32"> The <%= w.team.last_name %> scored 10 runs <%= @date == Date.today ? "today" : "on this day for" %> <b><%= w.team.owner.name %>.</b></p>
+        <p class="lead"><img src="<%= asset_path w.team.logo_src %>" width="32"> The <%= w.team.last_name %> scored 10 runs <%= @date == Date.today ? "today" : "on this day for" %> <b><%= w.team.owner.name %>.</b></p>
       <% end %>
     </div>
   </div>
