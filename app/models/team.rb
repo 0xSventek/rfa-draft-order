@@ -3,8 +3,14 @@ class Team < ActiveRecord::Base
   has_one :result
   
   def logo_src
-    src = self.first_name.downcase + " " + self.last_name.downcase
-    "/assets/logos/" + src.gsub(".","").gsub(" ","_") + ".png"
+    if Rails.env == "production"
+      src = self.first_name.downcase + " " + self.last_name.downcase
+      "/logos/" + src.gsub(".","").gsub(" ","_") + ".png"
+      asset_path src
+    else
+      src = self.first_name.downcase + " " + self.last_name.downcase
+      "/assets/logos/" + src.gsub(".","").gsub(" ","_") + ".png"
+    end
   end
   
   def self.randomize
