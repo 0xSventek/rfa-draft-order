@@ -51,7 +51,7 @@ class MlbGameScore < ActiveRecord::Base
     team_1_score      = y[0].split(" - ")[0].to_i
     team_2_score      = y[0].split(" - ")[1].to_i
     
-    game_score = find_or_initialize_by_twitter_status_id(tweet.id)
-    game_score.update_attributes team_1_id: team_1.id, team_2_id: team_2.id, team_1_score: team_1_score, team_2_score: team_2_score, twitter_status_id: tweet.id, twitter_timestamp: tweet.created_at
+    game_score = where(twitter_status_id: tweet.id.to_s)
+    create(team_1_id: team_1.id, team_2_id: team_2.id, team_1_score: team_1_score, team_2_score: team_2_score, twitter_status_id: tweet.id, twitter_timestamp: tweet.created_at) if game_score.blank?
   end
 end
