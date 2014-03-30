@@ -2,7 +2,7 @@ class MlbGameScore < ActiveRecord::Base
   belongs_to :team_1, class_name: "Team", foreign_key: :team_1_id
   belongs_to :team_2, class_name: "Team", foreign_key: :team_2_id
   
-  @@initial_tweet_id    = "319639652149649400"
+  @@initial_tweet_id    = "450127810552926208"
   
   def self.get_new_tweets
     
